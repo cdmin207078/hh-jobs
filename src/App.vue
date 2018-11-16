@@ -18,12 +18,12 @@
       <Content :style="{padding: '24px 0', minHeight: '280px', background: '#fff'}">
         <Layout>
           <Sider hide-trigger :style="{background: '#fff'}">
-            <Menu active-name="2" width="auto">
+            <Menu active-name="1" width="auto">
               <MenuGroup title="Job 管理">
-                <MenuItem name="1">
+                <MenuItem name="1" to="/dashboard">
                 <Icon type="ios-football" /> 概览
                 </MenuItem>
-                <MenuItem name="2">
+                <MenuItem name="2" to="/jobs">
                 <Icon type="ios-timer-outline" /> 所有 Job
                 </MenuItem>
               </MenuGroup>
@@ -35,19 +35,9 @@
             </Menu>
           </Sider>
           <Content :style="{padding: '0px 24px', minHeight: '280px', background: '#fff'}">
-
-            <Row :gutter="30" style="margin-bottom:10px;">
-              <Col span="6">
-                <Input placeholder="名称" clearable />
-              </Col>
-              <Col span="6">
-                <Input placeholder="服务器 IP" clearable />
-              </Col>
-              <Button type="primary">查找</Button>
-            </Row>
-
-            <Table border size="small" :data="tableData3" :columns="tableColumns3"></Table>
-            <Page :total="100" style="margin-top: 10px;" show-sizer />
+            <transition name="fade" mode="out-in">
+              <router-view></router-view>
+            </transition>
           </Content>
         </Layout>
       </Content>
@@ -60,144 +50,7 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      tableData3: [{
-          name: "John Brown",
-          age: 18,
-          address: "New York No. 1 Lake Park",
-          date: "2016-10-03"
-        },
-        {
-          name: "Jim Green",
-          age: 24,
-          address: "London No. 1 Lake Park",
-          date: "2016-10-01"
-        },
-        {
-          name: "Joe Black",
-          age: 30,
-          address: "Sydney No. 1 Lake Park",
-          date: "2016-10-02"
-        },
-        {
-          name: "Jon Snow",
-          age: 26,
-          address: "Ottawa No. 2 Lake Park",
-          date: "2016-10-04"
-        },
-        {
-          name: "John Brown",
-          age: 18,
-          address: "New York No. 1 Lake Park",
-          date: "2016-10-03"
-        },
-        {
-          name: "Jim Green",
-          age: 24,
-          address: "London No. 1 Lake Park",
-          date: "2016-10-01"
-        },
-        {
-          name: "Joe Black",
-          age: 30,
-          address: "Sydney No. 1 Lake Park",
-          date: "2016-10-02"
-        },
-        {
-          name: "Jon Snow",
-          age: 26,
-          address: "Ottawa No. 2 Lake Park",
-          date: "2016-10-04"
-        },
-        {
-          name: "John Brown",
-          age: 18,
-          address: "New York No. 1 Lake Park",
-          date: "2016-10-03"
-        },
-        {
-          name: "Jim Green",
-          age: 24,
-          address: "London No. 1 Lake Park",
-          date: "2016-10-01"
-        },
-        {
-          name: "Joe Black",
-          age: 30,
-          address: "Sydney No. 1 Lake Park",
-          date: "2016-10-02"
-        },
-        {
-          name: "Jon Snow",
-          age: 26,
-          address: "Ottawa No. 2 Lake Park",
-          date: "2016-10-04"
-        },
-        {
-          name: "John Brown",
-          age: 18,
-          address: "New York No. 1 Lake Park",
-          date: "2016-10-03"
-        },
-        {
-          name: "Jim Green",
-          age: 24,
-          address: "London No. 1 Lake Park",
-          date: "2016-10-01"
-        },
-        {
-          name: "Joe Black",
-          age: 30,
-          address: "Sydney No. 1 Lake Park",
-          date: "2016-10-02"
-        },
-        {
-          name: "Jon Snow",
-          age: 26,
-          address: "Ottawa No. 2 Lake Park",
-          date: "2016-10-04"
-        }
-      ]
-    };
-  },
-  computed: {
-    tableColumns3() {
-      let columns = [];
-
-      columns.push({
-        type: "selection",
-        width: 50,
-        align: "center"
-      });
-
-      columns.push({
-        title: "Date",
-        key: "date",
-        sortable: true
-      });
-
-      columns.push({
-        title: "Name",
-        key: "name"
-      });
-
-      columns.push({
-        title: "Age",
-        key: "age",
-        sortable: true
-      });
-
-      columns.push({
-        title: "Address",
-        key: "address"
-      });
-
-      return columns;
-    }
-  }
-};
+export default {};
 </script>
 
 <style scoped>
