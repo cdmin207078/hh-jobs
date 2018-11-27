@@ -228,7 +228,7 @@ export default {
                     // this.remove(params.index);
                     this.$router.push({
                       // name: "jobinfo",
-                      path: "/jobs/" + params.row.age
+                      path: "/jobs/" + params.row.id
                       // params: { id: params.row.age }
                     });
 

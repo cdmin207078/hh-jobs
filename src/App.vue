@@ -34,7 +34,7 @@
               </MenuGroup>
             </Menu>
           </Sider>
-          <Content :style="{padding: '0px 24px', minHeight: '280px', background: '#fff'}">
+          <Content :style="{padding: '0px 24px', minHeight: '380px', background: '#fff'}">
             <transition name="fade" mode="out-in">
               <router-view></router-view>
             </transition>
@@ -56,7 +56,6 @@ export default {};
 <style scoped>
 .layout {
   position: relative;
-  overflow: hidden;
 }
 
 .layout-logo {
