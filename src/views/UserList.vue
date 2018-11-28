@@ -2,18 +2,21 @@
   <div>
     <Row :gutter="30" style="margin-bottom:10px;">
       <Col span="6">
-      <Input placeholder="名称" clearable />
+        <Input placeholder="名称 \ 邮箱" clearable/>
       </Col>
       <Col span="6">
-      <Input placeholder="服务器 IP" clearable />
-      </Col>
-      <Col span="6">
-      <Button type="primary">查 找</Button>
+        <Button type="primary">查 找</Button>
       </Col>
     </Row>
-    
+
     <Table size="small" :data="tableData3" :columns="tableColumns3"></Table>
-    <Page :total="100" style="margin-top: 10px;" show-sizer />
+    <Page :total="100" style="margin-top: 10px;" show-sizer/>
+
+    <Modal v-model="modal1" title="Common Modal dialog box title" @on-ok="ok" @on-cancel="cancel">
+      <p>Content of dialog</p>
+      <p>Content of dialog</p>
+      <p>Content of dialog</p>
+    </Modal>
   </div>
 </template>
 
@@ -21,6 +24,7 @@
 export default {
   data() {
     return {
+      modal1: false,
       tableData3: [
         {
           id: 1,
@@ -129,59 +133,31 @@ export default {
       ]
     };
   },
+  methods: {
+    ok() {
+      this.$Message.info("Clicked ok");
+    },
+    cancel() {
+      this.$Message.info("Clicked cancel");
+    }
+  },
   computed: {
     tableColumns3() {
       let columns = [];
 
       columns.push({
-        type: "selection",
-        width: 50,
-        align: "center"
-      });
-
-      columns.push({
-        title: "名称",
+        title: "用户名",
         key: "name"
       });
 
       columns.push({
-        title: "描述",
-        key: "desc"
+        title: "邮箱",
+        key: "email"
       });
 
       columns.push({
-        title: "运行状态",
-        key: "status",
-        width: 150,
-        render: (h, params) => {
-          const row = params.row;
-          const color = row.status === 1 ? "success" : "error";
-          const text = row.status === 1 ? "working" : "stop";
-
-          return h(
-            "Tag",
-            {
-              props: {
-                type: "dot",
-                color: color
-              }
-            },
-            text
-          );
-        }
-      });
-
-      columns.push({
-        title: "Cron",
-        width: 100,
-        key: "cron",
-        sortable: true
-      });
-
-      columns.push({
-        width: 120,
-        title: "服务器",
-        key: "server"
+        title: "创建时间",
+        key: "createtime"
       });
 
       columns.push({
@@ -191,57 +167,21 @@ export default {
         align: "center",
         render: (h, params) => {
           return h("div", [
-            h("ButtonGroup", [
-              h("Button", {
+            h(
+              "Button",
+              {
                 props: {
-                  size: "small",
-                  icon: "md-pause"
+                  type: "primary",
+                  size: "small"
                 },
                 on: {
                   click: () => {
-                    this.$Message.success("暂停任务");
-                    // this.remove(params.index);
+                    this.modal1 = true;
                   }
                 }
-              }),
-              h("Button", {
-                props: {
-                  size: "small",
-                  icon: "ios-pulse"
-                },
-                on: {
-                  click: () => {
-                    this.$Message.success("查看任务执行日志");
-
-                    this.$router.push({
-                      path: "/jobs/" + params.row.id + "/log"
-                    })
-                    // this.remove(params.index);
-                  }
-                }
-              }),
-              h("Button", {
-                props: {
-                  size: "small",
-                  icon: "md-options"
-                  // to: '/jobinfo'
-                },
-                on: {
-                  click: () => {
-                    this.$Message.success("编辑设置");
-                    // this.remove(params.index);
-                    this.$router.push({
-                      // name: "jobinfo",
-                      path: "/jobs/" + params.row.id + "/option"
-                      // params: { id: params.row.age }
-                    });
-
-                    console.log(this.$router);
-                    console.log(params.row.age);
-                  }
-                }
-              })
-            ])
+              },
+              "编辑"
+            )
           ]);
         }
       });

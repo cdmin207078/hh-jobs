@@ -20,7 +20,7 @@
           <Sider hide-trigger :style="{background: '#fff'}">
             <Menu active-name="1" width="auto">
               <MenuGroup title="Job 管理">
-                <MenuItem name="1" to="/dashboard">
+                <MenuItem name="1" to="/">
                 <Icon type="ios-football" /> 概览
                 </MenuItem>
                 <MenuItem name="2" to="/jobs">
@@ -28,7 +28,7 @@
                 </MenuItem>
               </MenuGroup>
               <MenuGroup title="设置">
-                <MenuItem name="3">
+                <MenuItem name="3" to="/users">
                 <Icon type="logo-reddit" /> 用户管理
                 </MenuItem>
               </MenuGroup>

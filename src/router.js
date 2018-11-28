@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import Dashboard from './views/Dashboard.vue'
 import JobInfo from './views/JobInfo.vue'
 import JobInfoOption from './views/JobInfoOption.vue'
 import JobInfoLog from './views/JobInfoLog.vue'
 import JobList from './views/JobsList.vue'
+import UserList from './views/UserList.vue'
 
 
 Vue.use(Router)
@@ -16,11 +16,6 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
-    },
-    {
-      path: '/dashboard',
-      name: 'dashboard',
-      component: Dashboard
     },
     {
       path: '/jobs',
@@ -40,6 +35,10 @@ export default new Router({
           component: JobInfoLog
         }
       ]
+    },
+    {
+      path: '/users',
+      component: UserList
     },
     {
       path: '/about',
