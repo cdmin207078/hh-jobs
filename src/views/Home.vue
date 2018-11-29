@@ -1,10 +1,6 @@
 <template>
   <div class="home">
-    
-    <h1>Hello HH-Jobs.</h1>
-
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HelloWorld msg="Welcome to hh.Job"/>
   </div>
 </template>
 

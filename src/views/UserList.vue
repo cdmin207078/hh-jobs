@@ -2,7 +2,7 @@
   <div>
     <Row :gutter="30" style="margin-bottom:10px;">
       <Col span="6">
-        <Input placeholder="名称 \ 邮箱" clearable/>
+        <Input placeholder="姓名 \ 账号 \ 邮箱 \ 电话" clearable/>
       </Col>
       <Col span="6">
         <Button type="primary">查 找</Button>
@@ -12,10 +12,41 @@
     <Table size="small" :data="tableData3" :columns="tableColumns3"></Table>
     <Page :total="100" style="margin-top: 10px;" show-sizer/>
 
-    <Modal v-model="modal1" title="Common Modal dialog box title" @on-ok="ok" @on-cancel="cancel">
-      <p>Content of dialog</p>
-      <p>Content of dialog</p>
-      <p>Content of dialog</p>
+    <Modal v-model="modal1" title="账户信息编辑" :mask-closable="false" @on-ok="ok" @on-cancel="cancel">
+      <Form :model="formRight" label-position="right" :label-width="100">
+        <FormItem label="用户姓名">
+          <Input v-model="formRight.name"></Input>
+        </FormItem>
+        <FormItem label="登录账号">
+          <Input v-model="formRight.account"></Input>
+        </FormItem>
+        <FormItem label="密码">
+          <Input v-model="formRight.pwd"></Input>
+        </FormItem>
+        <FormItem label="确认密码">
+          <Input v-model="formRight.repwd"></Input>
+        </FormItem>
+        <FormItem label="电子邮箱">
+          <Input v-model="formRight.email"></Input>
+        </FormItem>
+        <FormItem label="手机号码">
+          <Input v-model="formRight.phone"></Input>
+        </FormItem>
+        <FormItem label="是否启用">
+          <i-switch v-model="formRight.enable">
+            <span slot="open">是</span>
+            <span slot="close">否</span>
+          </i-switch>
+        </FormItem>
+        <FormItem label="备注" prop="desc">
+          <Input
+            v-model="formRight.desc"
+            type="textarea"
+            :autosize="{minRows: 2,maxRows: 5}"
+            placeholder="备注信息"
+          ></Input>
+        </FormItem>
+      </Form>
     </Modal>
   </div>
 </template>
@@ -28,109 +59,39 @@ export default {
       tableData3: [
         {
           id: 1,
-          name: "AddBatchCallJob",
-          desc: "批次信息上传, 添加 call",
-          server: "192.168.20.72",
-          cron: "0/5 * * * * ?",
+          name: "张小凡",
+          account: "zhangxiaofan",
+          email: "zxf@qq.com",
+          phone: "13022939942",
           status: 1
-        },
-        {
-          id: 11,
-          name: "AddBatchCallJob",
-          desc: "批次信息上传, 添加 call",
-          server: "192.168.20.73",
-          cron: "0/5 * * * * ?",
-          status: 1
-        },
-        {
-          id: 12,
-          name: "AddBatchCallJob",
-          desc: "批次信息上传, 添加 call",
-          server: "192.168.20.74",
-          cron: "0/5 * * * * ?",
-          status: 0
         },
         {
           id: 2,
-          name: "DownloadJob",
-          desc: "下载, 批次语音 & 批次通话记录 下载打包",
-          server: "192.168.20.70",
-          cron: "0/5 * * * * ?",
-          status: 1
+          name: "卢云",
+          account: "luyun",
+          email: "luluyun@qq.com",
+          phone: "14788893847",
+          status: 0
         },
         {
           id: 3,
-          name: "CancelCallJob",
-          desc: "取消呼叫",
-          server: "192.168.20.72",
-          cron: "0/5 * * * * ? ",
-          status: 0
-        },
-        {
-          id: 4,
-          name: "AddBatchCallJob",
-          desc: "批次信息上传, 添加 call",
-          server: "192.168.20.72",
-          cron: "0/5 * * * * ?  ",
-          status: 0
-        },
-        {
-          id: 5,
-          name: "DailyStatisReportJob",
-          desc: "每日报表统计",
-          server: "181.138.20.72",
-          cron: "0 0 1 * * ?",
-          status: 1
-        },
-        {
-          id: 6,
-          name: "OpenApiCallBackErrorsJob",
-          desc: "呼叫结果, 客户接口返回 - 回调错误, 重试",
-          server: "192.168.20.72",
-          cron: "0/5 * * * * ? ",
-          status: 0
-        },
-        {
-          id: 7,
-          name: "OpenApiCallBackJob",
-          desc: "呼叫结果, 客户接口返回",
-          server: "192.168.20.72",
-          cron: "0/5 * * * * ? ",
-          status: 0
-        },
-        {
-          id: 8,
-          name: "SyncBatch2CallJob",
-          desc: "呼叫数据, 同步到外呼系统",
-          server: "192.168.20.72",
-          cron: "0/5 * * * * ?",
-          status: 0
-        },
-        {
-          id: 9,
-          name: "SyncCDRJob",
-          desc: "CDR 结果回调",
-          server: "192.168.20.72",
-          cron: "0/5 * * * * ?",
-          status: 1
-        },
-        {
-          id: 10,
-          name: "SyncNLPJob",
-          desc: "NLP 通话内容结果回调",
-          server: "192.168.20.72",
-          cron: "0/5 * * * * ?",
-          status: 1
-        },
-        {
-          id: 11,
-          name: "InitCacheDataJob",
-          desc: "每日系统缓存清理, 预热",
-          server: "192.168.20.72",
-          cron: "0/5 * * * * ?  ",
+          name: "张小凡",
+          account: "zhangxiaofan",
+          email: "zxf@qq.com",
+          phone: "13022939942",
           status: 1
         }
-      ]
+      ],
+      formRight: {
+        name: "",
+        account: "",
+        pwd: "",
+        repwd: "",
+        email: "",
+        phone: "",
+        enable: true,
+        desc: ""
+      }
     };
   },
   methods: {
@@ -146,18 +107,46 @@ export default {
       let columns = [];
 
       columns.push({
-        title: "用户名",
+        title: "用户姓名",
         key: "name"
       });
 
       columns.push({
-        title: "邮箱",
+        title: "登录账号",
+        key: "account"
+      });
+
+      columns.push({
+        title: "电子邮箱",
         key: "email"
       });
 
       columns.push({
-        title: "创建时间",
-        key: "createtime"
+        title: "手机号码",
+        key: "phone"
+      });
+
+      columns.push({
+        title: "状态",
+        key: "status",
+        render: (h, params) => {
+          const row = params.row;
+          const color = row.status === 1 ? "primary" : "default";
+          const text = row.status === 1 ? "启用" : "停用";
+
+          return h(
+            "Tag",
+            {
+              props: {
+                color: color
+              },
+              style: {
+                cursor: "default"
+              }
+            },
+            text
+          );
+        }
       });
 
       columns.push({
@@ -171,7 +160,6 @@ export default {
               "Button",
               {
                 props: {
-                  type: "primary",
                   size: "small"
                 },
                 on: {

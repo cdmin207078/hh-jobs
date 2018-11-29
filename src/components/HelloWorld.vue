@@ -1,42 +1,66 @@
 <template>
-  <div class="hello">
+  <div>
     <h1>{{ msg }}</h1>
-    <p>
-      For guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+
+    <Row :gutter="16">
+      <Col span="8">
+        <Card dis-hover>
+          <p slot="title">任务数量</p>
+          <i-circle :percent="80">
+            <span class="demo-Circle-inner" style="font-size:24px">80%</span>
+          </i-circle>
+        </Card>
+      </Col>
+      <Col span="8">
+        <Card dis-hover>
+          <p slot="title">调用次数</p>
+          <i-circle :percent="35" stroke-color="#ff5500">
+            <span class="demo-Circle-inner">
+              <Icon type="ios-close" size="50" style="color:#ff5500"></Icon>
+            </span>
+          </i-circle>
+        </Card>
+      </Col>
+
+      <Col span="8">
+        <Card dis-hover>
+          <p slot="title">警报</p>
+
+          <i-circle :percent="100" stroke-color="#5cb85c" style="margin-left: 30px;">
+            <Icon type="ios-checkmark" size="60" style="color:#5cb85c"></Icon>
+          </i-circle>
+        </Card>
+      </Col>
+    </Row>
+
+    <Row style="margin-top:10px;">
+      <Card dis-hover>
+        <p slot="title">调度报表</p>
+        <p>has a chart.</p>
+        <p>has a chart.</p>
+        <p>has a chart.</p>
+        <p>has a chart.</p>
+        <p>has a chart.</p>
+        <p>has a chart.</p>
+        <p>has a chart.</p>
+        <p>has a chart.</p>
+        <p>has a chart.</p>
+        <p>has a chart.</p>
+        <p>has a chart.</p>
+        <p>has a chart.</p>
+        <p>has a chart.</p>
+      </Card>
+    </Row>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: "HelloWorld",
   props: {
     msg: String
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
