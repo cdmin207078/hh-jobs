@@ -1,7 +1,6 @@
 <template>
   <div>
     <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
-      
       <Divider orientation="left">基础配置</Divider>
 
       <FormItem label="名称" prop="name">
@@ -25,6 +24,17 @@
           :autosize="{minRows: 2,maxRows: 5}"
           placeholder="描述信息"
         ></Input>
+      </FormItem>
+
+      <Divider orientation="left" style="margin-top: 30px;">失败重试</Divider>
+
+      <FormItem label="重试次数" prop="retryCount">
+        <InputNumber :max="10" :min="1" v-model="retryCount"></InputNumber>
+      </FormItem>
+
+      <FormItem label="重试间隔" prop="retryInterval">
+        <InputNumber :max="3600" :min="1" v-model="retryInterval"></InputNumber>
+        <span style="margin-left: 10px;">单位: 秒(s)</span>
       </FormItem>
 
       <Divider orientation="left" style="margin-top: 30px;">报警配置</Divider>
@@ -56,95 +66,110 @@ export default {
   data() {
     return {
       formValidate: {
-        name: '',
-        mail: '',
-        city: '',
-        gender: '',
+        name: "",
+        mail: "",
+        city: "",
+        gender: "",
         interest: [],
-        date: '',
-        time: '',
-        desc: ''
+        date: "",
+        time: "",
+        desc: "",
+        retryCount: 0,
+        retryInterval: 0
       },
       ruleValidate: {
-        name: [{
-          required: true,
-          message: 'The name cannot be empty',
-          trigger: 'blur'
-        }],
-        mail: [{
-            required: true,
-            message: 'Mailbox cannot be empty',
-            trigger: 'blur'
-          },
+        name: [
           {
-            type: 'email',
-            message: 'Incorrect email format',
-            trigger: 'blur'
+            required: true,
+            message: "The name cannot be empty",
+            trigger: "blur"
           }
         ],
-        city: [{
-          required: true,
-          message: 'Please select the city',
-          trigger: 'change'
-        }],
-        gender: [{
-          required: true,
-          message: 'Please select gender',
-          trigger: 'change'
-        }],
-        interest: [{
+        mail: [
+          {
             required: true,
-            type: 'array',
+            message: "Mailbox cannot be empty",
+            trigger: "blur"
+          },
+          {
+            type: "email",
+            message: "Incorrect email format",
+            trigger: "blur"
+          }
+        ],
+        city: [
+          {
+            required: true,
+            message: "Please select the city",
+            trigger: "change"
+          }
+        ],
+        gender: [
+          {
+            required: true,
+            message: "Please select gender",
+            trigger: "change"
+          }
+        ],
+        interest: [
+          {
+            required: true,
+            type: "array",
             min: 1,
-            message: 'Choose at least one hobby',
-            trigger: 'change'
+            message: "Choose at least one hobby",
+            trigger: "change"
           },
           {
-            type: 'array',
+            type: "array",
             max: 2,
-            message: 'Choose two hobbies at best',
-            trigger: 'change'
+            message: "Choose two hobbies at best",
+            trigger: "change"
           }
         ],
-        date: [{
-          required: true,
-          type: 'date',
-          message: 'Please select the date',
-          trigger: 'change'
-        }],
-        time: [{
-          required: true,
-          type: 'string',
-          message: 'Please select time',
-          trigger: 'change'
-        }],
-        desc: [{
+        date: [
+          {
             required: true,
-            message: 'Please enter a personal introduction',
-            trigger: 'blur'
+            type: "date",
+            message: "Please select the date",
+            trigger: "change"
+          }
+        ],
+        time: [
+          {
+            required: true,
+            type: "string",
+            message: "Please select time",
+            trigger: "change"
+          }
+        ],
+        desc: [
+          {
+            required: true,
+            message: "Please enter a personal introduction",
+            trigger: "blur"
           },
           {
-            type: 'string',
+            type: "string",
             min: 20,
-            message: 'Introduce no less than 20 words',
-            trigger: 'blur'
+            message: "Introduce no less than 20 words",
+            trigger: "blur"
           }
         ]
       }
-    }
+    };
   },
   methods: {
     handleSubmit(name) {
-      this.$refs[name].validate((valid) => {
+      this.$refs[name].validate(valid => {
         if (valid) {
-          this.$Message.success('Success!');
+          this.$Message.success("Success!");
         } else {
-          this.$Message.error('Fail!');
+          this.$Message.error("Fail!");
         }
-      })
+      });
     }
   }
-}
+};
 </script>
 
 <style lang="less">
